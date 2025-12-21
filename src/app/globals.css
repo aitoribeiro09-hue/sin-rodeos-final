@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 11 11 11; /* #0B0B0B */
+    --foreground: 242 242 242; /* #F2F2F2 */
+  }
+
+  body {
+    background-color: theme('colors.brand.bg');
+    color: theme('colors.brand.text');
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
