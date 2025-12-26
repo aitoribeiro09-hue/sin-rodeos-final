@@ -41,12 +41,18 @@ export const siteCopy = {
         copyright: '© 2024 Sin Rodeos. Todos los derechos reservados.',
         legal: ['Aviso Legal', 'Privacidad']
     },
-  form: {
-    submit: {
-      loading: "Enviando…",
-      success: "Listo. Revisa tu email.",
-      error: "No se pudo enviar. Inténtalo de nuevo."
-    }
+form: {
+  title: "Acceso anticipado.",
+  subtitle: "",
+  fields: {
+    name: { placeholder: "Escribe tu nombre" },
+    email: { placeholder: "Escribe tu gmail" },
+    case: { placeholder: "" }
+  },
+  submit: {
+    loading: "Enviando…",
+    success: "Listo. Revisa tu email.",
+    error: "No se pudo enviar. Inténtalo de nuevo."
   }
+},
 };
-

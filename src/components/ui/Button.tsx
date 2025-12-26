@@ -1,41 +1,41 @@
-"use client";
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
-import * as React from "react"
-import { motion } from "framer-motion"
-import { cn } from "@/lib/utils"
+type ButtonVariant = "primary" | "outline" | "ghost";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: 'primary' | 'outline' | 'ghost';
-    fullWidth?: boolean;
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: ButtonVariant;
+  fullWidth?: boolean;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ className, variant = 'primary', fullWidth, children, ...props }, ref) => {
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant = "primary", fullWidth = false, children, ...props }, ref) => {
+    const variants: Record<ButtonVariant, string> = {
+      primary:
+        "bg-red-600 text-white border border-transparent hover:bg-red-500",
+      outline:
+        "bg-transparent text-zinc-100 border border-zinc-800 hover:border-zinc-700",
+      ghost:
+        "bg-transparent text-zinc-200 hover:text-white",
+    };
 
-        // Editorial Style: Sharp corners (rounded-sm), high contrast, uppercase text often used in buttons
-        const variants = {
-            primary: "bg-brand-accent hover:bg-[#8a0e1d] text-white border border-transparent shadow-sm",
-            outline: "bg-transparent border border-brand-textSecondary/50 text-brand-text hover:border-brand-text hover:text-white",
-            ghost: "bg-transparent text-brand-textSecondary hover:text-brand-text",
-        }
+    return (
+      <button
+        ref={ref}
+        className={cn(
+          "inline-flex items-center justify-center rounded-2xl px-4 py-3 font-semibold transition disabled:cursor-not-allowed disabled:opacity-60",
+          fullWidth && "w-full",
+          variants[variant],
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </button>
+    );
+  }
+);
 
-        return (
-            <motion.button
-                whileTap={{ scale: 0.98 }}
-                className={cn(
-                    "inline-flex items-center justify-center rounded-sm px-8 py-4 text-sm font-semibold tracking-wider uppercase transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand-textSecondary disabled:opacity-50 disabled:pointer-events-none",
-                    variants[variant],
-                    fullWidth ? "w-full" : "",
-                    className
-                )}
-                ref={ref}
-                {...props}
-            >
-                {children}
-            </motion.button>
-        )
-    }
-)
-Button.displayName = "Button"
-
-export { Button }
+Button.displayName = "Button";
+export default Button;
